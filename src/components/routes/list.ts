@@ -1,4 +1,4 @@
-import {Home} from "../pages/home/Home";
+import { Home } from "../pages/home/Home";
 
 export const routes = [
     {
@@ -36,5 +36,6 @@ export const routes = [
         exact: true,
         component: Home,
         auth: false,
+        layout: false,
     }
-]
+];

@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { routes } from './list';
+import { Laoyut } from "../layout/Laoyut";
+import React from 'react';
 
 export const AppRoutes = () => {
     const isAuth = true;
@@ -12,11 +14,17 @@ export const AppRoutes = () => {
                         return null;
                     }
 
+                    const Element = route.component;
+
                     return (
                         <Route
                             path={route.path}
-                            element={<route.component />}
                             key={`route-${route.path}`}
+                            element={
+                                route.layout === false
+                                    ? <Element />
+                                    : <Laoyut><Element /></Laoyut>
+                            }
                         />
                     );
                 })}
