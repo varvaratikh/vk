@@ -1,10 +1,9 @@
-import {Box} from "@mui/material";
-import {Link} from "react-router-dom";
+import {UserItems} from "./UserItems";
 
 export const Sidebar = () => {
     return(
         <div>
-            
+            <UserItems />
         </div>
     )
 }

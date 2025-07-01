@@ -1,9 +1,14 @@
-import {Header} from "./header/Header";
-import {Sidebar} from "./sidebar/Sidebar";
-import {Grid} from "@mui/material";
+import Grid from "@mui/material/Grid";
+import { Header } from "./header/Header";
+import { Sidebar } from "./sidebar/Sidebar";
+import { ReactNode } from "react";
 
-export const Laoyut = ({children}) => {
-    return(
+interface LayoutProps {
+    children: ReactNode;
+}
+
+export const Laoyut: React.FC<LayoutProps> = ({ children }) => {
+    return (
         <>
             <Header />
             <Grid container spacing={2} marginX={5} marginTop={2}>
@@ -15,6 +20,5 @@ export const Laoyut = ({children}) => {
                 </Grid>
             </Grid>
         </>
-    )
-}
-
+    );
+};
