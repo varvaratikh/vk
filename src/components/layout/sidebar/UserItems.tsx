@@ -1,23 +1,25 @@
 import {Link} from "react-router-dom";
-import {Box} from "@mui/material";
+import {Avatar, Box, Card} from "@mui/material";
 
 export const UserItems = () => {
     return(
-        <Box sx={{
-            display: "flex",
-            alignItems: 'center',
-
+        <Card variant='outlined'
+            sx={{
+                padding: 2,
+                backgroundColor: '#F1F7FA',
+                border: 'none',
+                borderRadius: 3
         }}>
-            <Link to="/profile">
-                <Box sx={{position: 'relative', marginRight: 5, borderRadius: '50%', overflow: 'hidden', width: 50, height: 50}}>
-                    <img src="https://russian.people.com.cn/NMediaFile/2024/0408/FOREIGN1712567381216Q9C7PEHJ8A.jpg" alt=""
-                         width='50' height='50'
+            <Link to="/profile" style={{display: 'flex', alignItems: 'center', textDecoration: 'none', color: '#111', marginBottom: 12}}>
+                <Box sx={{position: 'relative', marginRight: 2, overflow: 'hidden', width: 50, height: 50}}>
+                    <Avatar src="https://russian.people.com.cn/NMediaFile/2024/0408/FOREIGN1712567381216Q9C7PEHJ8A.jpg" alt=""
+                         sx={{width: 46, height: 46, borderRadius: '50%',}}
                     />
-                    <Box sx={{backgroundColor: 'green', width: 4, height: 4, position: 'absolute', bottom: 2, left: 2}}>
+                    <Box sx={{backgroundColor: '#4FB14F', width: 12, height: 12, position: 'absolute', bottom: 0, right: 0, borderRadius: '50%', border: '2px solid #F1F7FA'}}>
                     </Box>
                 </Box>
-                <span>Тихонова Варвара</span>
+                <span style={{fontSize: 14}}>Тихонова Варвара</span>
             </Link>
-        </Box>
+        </Card>
     )
 }
