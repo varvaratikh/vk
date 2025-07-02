@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
-import {Avatar, Box, Card} from "@mui/material";
+import {Avatar, Box, Card, List, ListItem, ListItemButton, ListItemIcon} from "@mui/material";
+import { QuestionAnswer } from '@mui/icons-material';
 
 export const UserItems = () => {
     return(
@@ -15,11 +16,21 @@ export const UserItems = () => {
                     <Avatar src="https://russian.people.com.cn/NMediaFile/2024/0408/FOREIGN1712567381216Q9C7PEHJ8A.jpg" alt=""
                          sx={{width: 46, height: 46, borderRadius: '50%',}}
                     />
-                    <Box sx={{backgroundColor: '#4FB14F', width: 12, height: 12, position: 'absolute', bottom: 0, right: 0, borderRadius: '50%', border: '2px solid #F1F7FA'}}>
+                    <Box sx={{backgroundColor: '#4FB14F', width: 12, height: 12, position: 'absolute', bottom: 1, right: 1, borderRadius: '50%', border: '2px solid #F1F7FA'}}>
                     </Box>
                 </Box>
                 <span style={{fontSize: 14}}>Тихонова Варвара</span>
             </Link>
+
+            <List>
+                <ListItem disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <QuestionAnswer />
+                        </ListItemIcon>
+                    </ListItemButton>
+                </ListItem>
+            </List>
         </Card>
     )
 }
