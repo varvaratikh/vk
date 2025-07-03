@@ -1,8 +1,13 @@
 import {Link} from "react-router-dom";
-import {Avatar, Box, Card, List, ListItem, ListItemButton, ListItemIcon} from "@mui/material";
+import {Avatar, Box, Card, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import { QuestionAnswer } from '@mui/icons-material';
 
+import { useNavigate } from 'react-router-dom';
+
 export const UserItems = () => {
+
+    const navigate = useNavigate();
+
     return(
         <Card variant='outlined'
             sx={{
@@ -24,10 +29,11 @@ export const UserItems = () => {
 
             <List>
                 <ListItem disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
+                    <ListItemButton onClick={() => navigate('/messages')}>
+                    <ListItemIcon>
                             <QuestionAnswer />
                         </ListItemIcon>
+                        <ListItemText primary="Сообщения"/>
                     </ListItemButton>
                 </ListItem>
             </List>
