@@ -9,11 +9,11 @@ export const menu = [
     {
         title: 'Друзья',
         link: '/friends',
-        icon: Icons.Home
+        icon: Icons.People
     },
     {
         title: 'Новости',
         link: '/',
-        icon: Icons.Home
+        icon: Icons.Article
     },
 ]

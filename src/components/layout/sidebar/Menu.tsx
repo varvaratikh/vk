@@ -3,6 +3,7 @@ import {Avatar, Box, Card, List, ListItem, ListItemButton, ListItemIcon, ListIte
 import { QuestionAnswer } from '@mui/icons-material';
 
 import { useNavigate } from 'react-router-dom';
+import {menu} from "./dataMenu";
 
 export const Menu = () => {
 
@@ -14,18 +15,24 @@ export const Menu = () => {
                   padding: 2,
                   backgroundColor: '#F1F7FA',
                   border: 'none',
-                  borderRadius: 3
-              }}> 
+                  borderRadius: 3,
+                  marginTop: 5
+              }}>
 
             <List>
-                <ListItem disablePadding>
-                    <ListItemButton onClick={() => navigate('/messages')}>
-                        <ListItemIcon>
-                            <QuestionAnswer />
-                        </ListItemIcon>
-                        <ListItemText primary="Сообщения"/>
-                    </ListItemButton>
-                </ListItem>
+                {menu.map(item => (
+                    <ListItem disablePadding>
+                        <ListItemButton onClick={() => navigate(item.link)}>
+                            <ListItemIcon sx={{
+                                minWidth: 36
+                            }}>
+                                <item.icon />
+                            </ListItemIcon>
+                            <ListItemText primary={item.title}/>
+                        </ListItemButton>
+                    </ListItem>
+                    )
+                )}
             </List>
         </Card>
     )
