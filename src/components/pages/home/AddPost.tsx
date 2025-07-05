@@ -1,6 +1,11 @@
 import {Box, TextField} from "@mui/material";
+import {TypeSetState} from "../../../../types";
 
-export const AddPost = () => {
+interface IAddPost{
+    setPosts: TypeSetState<IPost[]>
+}
+
+export const AddPost<IAddPost> = () => {
     return(
         <Box sx={{
             border: '1px solid #ccc',
@@ -10,7 +15,7 @@ export const AddPost = () => {
             <TextField label="Расскажи, что у тебя нового" variant="outlined" InputProps={{
                 sx: {
                     borderRadius: "25px",
-                    bgcolor: '#F8F8F8'
+                    backgroundColor: '#F9F9F9'
                 },
             }} sx={{width: "100%"}}/>
         </Box>
