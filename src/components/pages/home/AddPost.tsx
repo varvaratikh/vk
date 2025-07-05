@@ -1,11 +1,25 @@
 import {Box, TextField} from "@mui/material";
-import {TypeSetState} from "../../../../types";
+import {IPost, TypeSetState} from "../../../../types";
+import {useState} from "react";
+import {users} from "../../layout/sidebar/dataUsers";
 
-interface IAddPost{
+interface IAddPostProps {
     setPosts: TypeSetState<IPost[]>
 }
 
-export const AddPost<IAddPost> = () => {
+//TODO: остановилась на 01:09:00
+
+export const AddPost = ({ setPosts }: IAddPostProps) => {
+    const [content, setContent] = useState<string>('');
+
+    const addPostHandler = () => {
+        setPosts(prev => [...prev, {
+            author: users[0],
+            content,
+            createdAt: '5 минут назад',
+        }])
+    }
+
     return(
         <Box sx={{
             border: '1px solid #ccc',
@@ -17,7 +31,11 @@ export const AddPost<IAddPost> = () => {
                     borderRadius: "25px",
                     backgroundColor: '#F9F9F9'
                 },
-            }} sx={{width: "100%"}}/>
+            }} sx={{width: "100%"}}
+            onKeyPress={addPostHandler}
+                       onChange={e => setContent(e.target.value)}
+                       value={content}
+            />
         </Box>
     )
 }

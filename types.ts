@@ -1,9 +1,11 @@
 import {Dispatch, SetStateAction} from "react";
+import {OverridableComponent} from "@mui/material/OverridableComponent";
+import {SvgIconTypeMap} from "@mui/material";
 
 export type TypeSetState<T> = Dispatch<SetStateAction<T>>
 
 export interface IUser{
-    id: string,
+    _id: string,
     avatar: string,
     name: string,
     isInNetwork: boolean
@@ -19,5 +21,5 @@ export interface IPost {
 export interface IMenuItem{
     title: string,
     link: string,
-    icon: React.Component
+    icon: OverridableComponent<SvgIconTypeMap<{}, 'svg'>> & {muiName: string}
 }
