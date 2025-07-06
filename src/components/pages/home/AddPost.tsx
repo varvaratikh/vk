@@ -9,7 +9,7 @@ interface IAddPostProps {
 
 //TODO: остановилась на 01:09:00
 
-export const AddPost = ({ setPosts }: IAddPostProps) => {
+export const AddPost = ({ setPosts }: IAddPostProps) => { 
     const [content, setContent] = useState<string>('');
 
     const addPostHandler = () => {
