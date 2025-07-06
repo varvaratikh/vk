@@ -8,10 +8,11 @@ export interface IUser{
     _id: string,
     avatar: string,
     name: string,
-    isInNetwork: boolean
+    isInNetwork?: boolean
 }
 
 export interface IPost {
+    _id: string,
     author: IUser,
     createdAt: string,
     content: string,
