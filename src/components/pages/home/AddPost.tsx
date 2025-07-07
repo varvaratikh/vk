@@ -7,18 +7,23 @@ interface IAddPostProps {
     setPosts: TypeSetState<IPost[]>
 }
 
-//TODO: остановилась на 01:09:00
-
 export const AddPost = ({ setPosts }: IAddPostProps) => { 
     const [content, setContent] = useState<string>('');
 
-    const addPostHandler = () => {
-        setPosts(prev => [...prev, {
-            author: users[0],
-            content,
-            createdAt: '5 минут назад',
-        }])
-    }
+    const addPostHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            setPosts(prev => [
+                {
+                    _id: crypto.randomUUID(),
+                    author: users[0],
+                    content,
+                    createdAt: '5 минут назад',
+                },
+                ...prev
+            ]);
+            setContent('');
+        }
+    };
 
     return(
         <Box sx={{

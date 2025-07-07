@@ -12,7 +12,7 @@ export interface IUser{
 }
 
 export interface IPost {
-    _id: string,
+    _id?: string,
     author: IUser,
     createdAt: string,
     content: string,

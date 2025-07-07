@@ -10,15 +10,15 @@ export const Posts = ({posts}: IPosts) => {
 
     return (
         <>
-            {posts.map(post => (
-                <ImageList
-                    key={post._id}
+            {posts.map((post, index) => (
+                <Box
                     sx={{
                         border: '1px solid #ccc',
                         borderRadius: "10px",
                         padding: 2,
-                        marginBottom: 2
+                        marginTop: 4
                     }}
+                    key={`Post- ${index}`}
                 >
                     <Link
                         to={`/profile/${post.author._id}`}
@@ -48,8 +48,8 @@ export const Posts = ({posts}: IPosts) => {
                             />
                         </Box>
                         <div>
-                            <span style={{fontSize: 14}}>{post.author.name}</span><br />
-                            <span style={{fontSize: 14, opacity: '0.6'}}>{post.createdAt}</span>
+                            <div style={{fontSize: 14}}>{post.author.name}</div><br />
+                            <div style={{fontSize: 14, opacity: '0.6', marginTop: '-13px'}}>{post.createdAt}</div>
                         </div>
                     </Link>
 
@@ -64,7 +64,7 @@ export const Posts = ({posts}: IPosts) => {
                             ))}
                         </ImageList>
                     )}
-                </ImageList>
+                </Box>
             ))}
         </>
     )
