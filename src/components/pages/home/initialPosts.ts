@@ -21,4 +21,3 @@ export const initialPosts: IPost[] = [{
     ]
 }];
 
-//Todo: останавилась на 1:16:44

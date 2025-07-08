@@ -1,7 +1,12 @@
+import logoImage from './pngwing.com.png';
+
 export const Header = () => {
     return(
-        <div>
-
-        </div>
+        <header  className='header'>
+            <img src={logoImage} alt="" />
+            <input type="text" />
+        </header>
     )
 }
+
+//TODO: останавилась на 1:25:13
