@@ -1,10 +1,8 @@
-import React, {createContext} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { AppRoutes } from "./components/routes/AppRoutes";
- import firebase from 'firebase/app'
-import 'firebase/auth';
-import 'firebase/firestore';
+import * as firebase from 'firebase/app'
 
 const firebaseConfig = {
     apiKey: "AIzaSyBS81cK9jJxAVrZmOYLVsdD769KbQIu8o4",
@@ -16,23 +14,6 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-
-interface IContext{
-
-}
-
-const FireBaseContext = createContext<IContext>(null)
-
-const auth= firebase.auth()
-const fireStore = firebase.firestore()
-
-
-
-
-
-
-
-
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
