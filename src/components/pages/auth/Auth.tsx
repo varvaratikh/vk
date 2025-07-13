@@ -2,7 +2,7 @@ import {Alert, Button, ButtonGroup, TextField} from "@mui/material";
 import {SyntheticEvent, useState} from "react";
 import {IUserData} from "./types";
 import Grid from "@mui/material/Grid";
-import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth'
+import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
 
 export const Auth = () => {
 
@@ -26,6 +26,12 @@ export const Auth = () => {
                 error.message && setError(error.message)
             }
         } else{
+            try {
+                await signInWithEmailAndPassword(auth, userData.email, userData.password)
+            } catch(error: any) {
+                error.message && setError(error.message)
+            }
+
             console.log('auth');
         }
         
