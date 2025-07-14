@@ -1,60 +1,64 @@
-import {Alert, Button, ButtonGroup, TextField} from "@mui/material";
-import {SyntheticEvent, useState} from "react";
-import {IUserData} from "./types";
+import { Alert, Button, ButtonGroup, TextField } from "@mui/material";
+import { SyntheticEvent, useEffect, useState } from "react";
+import { IUserData } from "./types";
 import Grid from "@mui/material/Grid";
-import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../providers/useAuth";
+
+interface IAuthContext {
+    ga: ReturnType<typeof getAuth>;
+    user: any;
+}
 
 export const Auth = () => {
+    const { ga, user } = useAuth() as IAuthContext;
+    const navigate = useNavigate();
 
-    const [isRegForm, setIsRegForm] = useState(false)
-
+    const [isRegForm, setIsRegForm] = useState(false);
     const [userData, setUserData] = useState<IUserData>({
         email: '',
         password: ''
-    } as IUserData)
+    });
 
     const [error, setError] = useState('');
 
-    const handleLogin = async(e : SyntheticEvent<HTMLFormElement>) => {
-        e.preventDefault()
+    const handleLogin = async (e: SyntheticEvent<HTMLFormElement>) => {
+        e.preventDefault();
 
-        const auth = getAuth();
-        if(isRegForm){
-            try {
-                await createUserWithEmailAndPassword(auth, userData.email, userData.password)
-            } catch(error: any) {
-                error.message && setError(error.message)
+        try {
+            if (isRegForm) {
+                await createUserWithEmailAndPassword(ga, userData.email, userData.password);
+            } else {
+                await signInWithEmailAndPassword(ga, userData.email, userData.password);
             }
-        } else{
-            try {
-                await signInWithEmailAndPassword(auth, userData.email, userData.password)
-            } catch(error: any) {
-                error.message && setError(error.message)
-            }
-
-            console.log('auth');
+        } catch (error: any) {
+            error.message && setError(error.message);
         }
-        
-        setUserData({
-            email: '',
-            password: ''
-        })
+
+        setUserData({ email: '', password: '' });
     }
 
-    return(
+    useEffect(() => {
+        if (user) {
+            navigate('/');
+        }
+    }, [user]);
+
+    return (
         <>
-            {error && <Alert severity="error" style={{marginBottom: 20}}>{error}</Alert>}
+            {error && <Alert severity="error" style={{ marginBottom: 20 }}>{error}</Alert>}
             <Grid display="flex" justifyContent='center' alignItems='center'>
                 <form onSubmit={handleLogin}>
                     <TextField type="email" label="Email" variant="outlined" value={userData.email}
-                               onChange={e => setUserData({...userData, email: e.target.value})}
-                               sx={{display: 'block', marginBottom: 3}}
+                               onChange={e => setUserData({ ...userData, email: e.target.value })}
+                               sx={{ display: 'block', marginBottom: 3 }}
                                required
                     />
 
                     <TextField type="password" label="Password" variant="outlined" value={userData.password}
-                               onChange={e => setUserData({...userData, password: e.target.value})}
-                               sx={{display: 'block'}}
+                               onChange={e => setUserData({ ...userData, password: e.target.value })}
+                               sx={{ display: 'block' }}
                                required
                     />
 
@@ -65,6 +69,5 @@ export const Auth = () => {
                 </form>
             </Grid>
         </>
-    )
+    );
 }
-

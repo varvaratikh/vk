@@ -1,16 +1,16 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Switch } from 'react-router-dom';
 import { routes } from './list';
 import { Laoyut } from "../layout/Laoyut";
 import React from 'react';
+import {useAuth} from "../providers/useAuth";
 
 export const AppRoutes = () => {
-    const isAuth = true;
-
+    const { user } = useAuth()
     return (
         <Router>
-            <Routes>
+            <Switch>
                 {routes.map(route => {
-                    if (route.auth && !isAuth) {
+                    if (route.auth && !user) {
                         return null;
                     }
 
@@ -28,7 +28,7 @@ export const AppRoutes = () => {
                         />
                     );
                 })}
-            </Routes>
+            </Switch>
         </Router>
     );
 };

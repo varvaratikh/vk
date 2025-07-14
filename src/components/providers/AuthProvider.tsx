@@ -9,7 +9,7 @@ interface IContext {
     ga: Auth
 }
 
-const AuthContext = createContext<IContext>({} as IContext)
+export const AuthContext = createContext<IContext>({} as IContext);
 
 export const AuthProvider = ({children}) => {
     const [user, setUser] = useState<IUser | null>(null);
