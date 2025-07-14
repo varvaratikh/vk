@@ -35,5 +35,3 @@ export const AuthProvider = ({children}) => {
 
     return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>
 }
-
-//TODO: остановилась на 2:05:55
