@@ -12,12 +12,14 @@ export const User = () => {
                   padding: 2,
                   backgroundColor: '#F1F7FA',
                   border: 'none',
-                  borderRadius: 3
+                  borderRadius: 3,
+                  marginBottom: 5
               }}>
 
             <Chip avatar={<Avatar alt='' src={user?.avatar} />}
-                  label='Avatar'
+                  label={user?.name || 'Без имени'}
                   variant='outlined'
+                  sx={{ display: "flex", marginBottom: 2}}
             />
             <Button variant="outlined" onClick={() => signOut(ga)}>
                 Выйти
