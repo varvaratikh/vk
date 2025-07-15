@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Switch } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { routes } from './list';
 import { Laoyut } from "../layout/Laoyut";
 import React from 'react';
@@ -8,11 +8,9 @@ export const AppRoutes = () => {
     const { user } = useAuth()
     return (
         <Router>
-            <Switch>
+            <Routes>
                 {routes.map(route => {
-                    if (route.auth && !user) {
-                        return null;
-                    }
+                    if (route.auth && !user) return null;
 
                     const Element = route.component;
 
@@ -28,7 +26,7 @@ export const AppRoutes = () => {
                         />
                     );
                 })}
-            </Switch>
+            </Routes>
         </Router>
     );
 };

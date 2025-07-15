@@ -1,4 +1,4 @@
-import {createContext, useEffect, useMemo, useState} from "react";
+import {createContext, ReactNode, useEffect, useMemo, useState} from "react";
 import {IUser, TypeSetState} from "../../../types";
 import {getAuth, onAuthStateChanged, Auth} from 'firebase/auth';
 import {users} from "../layout/sidebar/dataUsers";
@@ -9,9 +9,13 @@ interface IContext {
     ga: Auth
 }
 
+interface IAuthProviderProps {
+    children: ReactNode;
+}
+
 export const AuthContext = createContext<IContext>({} as IContext);
 
-export const AuthProvider = ({children}) => {
+export const AuthProvider = ({ children }: IAuthProviderProps) => {
     const [user, setUser] = useState<IUser | null>(null);
 
     const ga  = getAuth()
