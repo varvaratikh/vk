@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
                 setUser( {
                     _id: authUser.uid,
                     avatar: users[1].avatar,
-                    name: authUser?.displayName || ''
+                    name: authUser.displayName || ''
                 })
             } else{
                 setUser(null)
