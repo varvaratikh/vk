@@ -2,6 +2,7 @@ import {createContext, ReactNode, useEffect, useMemo, useState} from "react";
 import {IUser, TypeSetState} from "../../../types";
 import {getAuth, onAuthStateChanged, Auth} from 'firebase/auth';
 import {users} from "../layout/sidebar/dataUsers";
+import {useNavigate} from "react-router-dom/dist";
 
 interface IContext {
     user: IUser | null,
@@ -18,15 +19,20 @@ export const AuthContext = createContext<IContext>({} as IContext);
 export const AuthProvider = ({ children }: IAuthProviderProps) => {
     const [user, setUser] = useState<IUser | null>(null);
 
-    const ga  = getAuth()
+    const ga  = getAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const unListen = onAuthStateChanged(ga,authUser => {
-            setUser(authUser ? {
-                _id: authUser.uid,
-                avatar: users[1].avatar,
-                name: authUser?.displayName || ''
-            } : null)
+            if(authUser){
+                setUser( {
+                    _id: authUser.uid,
+                    avatar: users[1].avatar,
+                    name: authUser?.displayName || ''
+                })
+            } else{
+                setUser(null)
+            }
         })
         return () => {
             unListen()
