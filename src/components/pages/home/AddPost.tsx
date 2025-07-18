@@ -2,6 +2,7 @@ import {Box, TextField} from "@mui/material";
 import {IPost, TypeSetState} from "../../../../types";
 import {useState} from "react";
 import {users} from "../../layout/sidebar/dataUsers";
+import {useAuth} from "../../providers/useAuth";
 
 interface IAddPostProps {
     setPosts: TypeSetState<IPost[]>
@@ -9,13 +10,14 @@ interface IAddPostProps {
 
 export const AddPost = ({ setPosts }: IAddPostProps) => { 
     const [content, setContent] = useState<string>('');
+    const {user} = useAuth()
 
     const addPostHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter' && user) {
             setPosts(prev => [
                 {
                     _id: crypto.randomUUID(),
-                    author: users[0],
+                    author: user,
                     content,
                     createdAt: '5 минут назад',
                 },
