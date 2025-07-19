@@ -46,3 +46,5 @@ export const AddPost = ({ setPosts }: IAddPostProps) => {
         </Box>
     )
 }
+
+//TODO: останавилась на 2:19:53
