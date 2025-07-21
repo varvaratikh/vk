@@ -1,8 +1,9 @@
-import {Box, TextField} from "@mui/material";
+import {Alert, Box, TextField} from "@mui/material";
 import {IPost, TypeSetState} from "../../../../types";
 import {useState} from "react";
 import {users} from "../../layout/sidebar/dataUsers";
 import {useAuth} from "../../providers/useAuth";
+import { addDoc, collection} from 'firebase/firestore'
 
 interface IAddPostProps {
     setPosts: TypeSetState<IPost[]>
@@ -10,10 +11,22 @@ interface IAddPostProps {
 
 export const AddPost = ({ setPosts }: IAddPostProps) => { 
     const [content, setContent] = useState<string>('');
-    const {user} = useAuth()
+    const {user, db} = useAuth();
+    const [error, setError] = useState('');
 
     const addPostHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter' && user) {
+
+            try {
+                const docRef = await addDoc(collection(db, 'posts'), {
+                    author: user,
+                    content
+                })
+                console.log('Document written with ID:', docRef.id)
+            } catch(e) {
+                console.error('Error adding document', e)
+            }
+
             setPosts(prev => [
                 {
                     _id: crypto.randomUUID(),
@@ -28,23 +41,25 @@ export const AddPost = ({ setPosts }: IAddPostProps) => {
     };
 
     return(
-        <Box sx={{
-            border: '1px solid #ccc',
-            borderRadius: "10px",
-            padding: 2
-        }}>
-            <TextField label="Расскажи, что у тебя нового" variant="outlined" InputProps={{
-                sx: {
-                    borderRadius: "25px",
-                    backgroundColor: '#F9F9F9'
-                },
-            }} sx={{width: "100%"}}
-            onKeyPress={addPostHandler}
-                       onChange={e => setContent(e.target.value)}
-                       value={content}
-            />
-        </Box>
+        <>
+            {error && <Alert severity="error" style={{ marginBottom: 20 }}>{error}</Alert>}
+
+            <Box sx={{
+                border: '1px solid #ccc',
+                borderRadius: "10px",
+                padding: 2
+            }}>
+                <TextField label="Расскажи, что у тебя нового" variant="outlined" InputProps={{
+                    sx: {
+                        borderRadius: "25px",
+                        backgroundColor: '#F9F9F9'
+                    },
+                }} sx={{width: "100%"}}
+                           onKeyPress={addPostHandler}
+                           onChange={e => setContent(e.target.value)}
+                           value={content}
+                />
+            </Box>
+        </>
     )
 }
-
-//TODO: останавилась на 2:19:53
