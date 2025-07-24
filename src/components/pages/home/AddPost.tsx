@@ -14,16 +14,17 @@ export const AddPost = ({ setPosts }: IAddPostProps) => {
     const {user, db} = useAuth();
     const [error, setError] = useState('');
 
-    const addPostHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const addPostHandler = async (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter' && user) {
 
             try {
                 const docRef = await addDoc(collection(db, 'posts'), {
                     author: user,
-                    content
+                    content,
+                    createdAt: '10 минут назад',
                 })
                 console.log('Document written with ID:', docRef.id)
-            } catch(e) {
+            } catch(e: any) {
                 console.error('Error adding document', e)
             }
 
