@@ -1,7 +1,6 @@
 import {Alert, Box, TextField} from "@mui/material";
 import {IPost, TypeSetState} from "../../../../types";
 import {useState} from "react";
-import {users} from "../../layout/sidebar/dataUsers";
 import {useAuth} from "../../providers/useAuth";
 import { addDoc, collection} from 'firebase/firestore'
 
