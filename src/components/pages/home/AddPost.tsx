@@ -4,9 +4,9 @@ import {useState} from "react";
 import {useAuth} from "../../providers/useAuth";
 import { addDoc, collection} from 'firebase/firestore'
 
-interface IAddPostProps {
-    setPosts: TypeSetState<IPost[]>
-}
+// interface IAddPostProps {
+//     setPosts: TypeSetState<IPost[]>
+// }
 
 export const AddPost = ({ setPosts }: IAddPostProps) => { 
     const [content, setContent] = useState<string>('');
